@@ -1,0 +1,340 @@
+<!-- Save as templates/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lung Cancer Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+  <style>
+    :root {
+      /* Dark page gradient matching form/results */
+      --bg-dark: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      /* Light page gradient (if toggled) */
+      --bg-light: linear-gradient(to right, #141e30, #243b55);
+      /* Main text color */
+      --text-dark: #eee;
+      /* Accent gradient for headings/buttons */
+      --accent: linear-gradient(90deg, #00f0ff, #ff00c8);
+      /* Glass-card background overlay */
+      --glass-bg: rgba(255,255,255,0.1);
+      /* Glass-card border */
+      --glass-border: rgba(255,255,255,0.2);
+      /* Button hover glow */
+      --glow-c1: rgba(0,255,255,0.4);
+      --glow-c2: rgba(255,0,255,0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background 0.5s, color 0.5s;
+      overflow-x: hidden;
+    }
+    .light-mode {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0; left: 0;
+      z-index: 999;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+    header nav a {
+      margin: 0 15px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    header nav a:hover {
+      color: #00f0ff;
+    }
+    .toggle-theme {
+      background: var(--glass-bg);
+      color: #fff;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 8px 18px;
+      cursor: pointer;
+      font-weight: bold;
+      backdrop-filter: blur(5px);
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; text-align: center;
+      padding: 120px 20px; scroll-margin-top: 100px;
+    }
+
+    .glass-card {
+      max-width: 720px;
+      padding: 50px 40px;
+      background: var(--glass-bg);
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      position: relative; z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 2rem;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow:
+        0 0 25px var(--glow-c1),
+        0 0 50px var(--glow-c2);
+    }
+
+    .lung-image {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.03;
+      max-width: 900px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    canvas#particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: #00f0ff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px; height: 45px;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      z-index: 1001;
+    }
+
+    .swiper {
+      width: 90%; padding: 20px 0;
+    }
+
+    .swiper-slide {
+      background: var(--glass-bg);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      color: var(--text-dark);
+    }
+
+    form input, form textarea {
+      width: 100%; margin: 10px 0; padding: 10px;
+      border-radius: 10px; border: 1px solid #ccc;
+      font-family: inherit; resize: none;
+      background: rgba(255,255,255,0.9);
+      color: #333;
+    }
+
+    #loader {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: var(--bg-dark);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 2000;
+    }
+    #loader.hidden { display: none; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      p { font-size: 1rem; }
+      .btn { padding: 12px 30px; font-size: 1rem; }
+      header { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <!-- Loader -->
+  <div id="loader">
+    <lottie-player
+      src="https://assets10.lottiefiles.com/packages/lf20_j1adxtyb.json"
+      background="transparent" speed="1"
+      style="width:200px; height:200px;" loop autoplay>
+    </lottie-player>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <div style="font-weight: 600; color:#fff;">🫁 Lung Cancer AI</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="toggle-theme" onclick="toggleTheme()">🌓 Theme</button>
+  </header>
+
+  <!-- Backgrounds -->
+  <canvas id="particles-js"></canvas>
+  <img src="https://i.ibb.co/6bgH7xM/lungs-transparent.png"
+       alt="Lungs" class="lung-image"/>
+
+  <!-- Sections -->
+  <section id="home" data-aos="fade-up">
+    <div class="glass-card">
+      <h1>Lung Cancer Prediction System</h1>
+      <p>AI-powered detection using health patterns and lifestyle risk. Fast, private, smart.</p>
+      <lottie-player
+        src="https://assets3.lottiefiles.com/packages/lf20_3vbOcw.json"
+        background="transparent" speed="1"
+        style="width:250px; height:250px;" loop autoplay>
+      </lottie-player>
+      <a href="{{ url_for('form_page') }}">
+        <button class="btn">Start Diagnosis</button>
+      </a>
+    </div>
+  </section>
+
+  <section id="features" data-aos="fade-up">
+    <h2>✨ Features</h2>
+    <p>⚡ Fast Predictions · 🔒 Privacy First · 📈 Smart Insights</p>
+    <lottie-player
+      src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json"
+      background="transparent" speed="1"
+      style="width:250px; height:250px;" loop autoplay>
+    </lottie-player>
+  </section>
+
+  <section id="about" data-aos="fade-up">
+    <h2>About Project</h2>
+    <p>This system uses deep learning to detect lung cancer risk. Designed for real-world healthcare use.</p>
+  </section>
+
+  <section id="testimonials" data-aos="fade-up">
+    <h2>🗣 Testimonials</h2>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">"Excellent tool for early detection useful for rural areas!" – NGO Volunteer</div>
+        <div class="swiper-slide">"Loved the clean UI and fast results." – Patient Riya</div>
+        <div class="swiper-slide">"Great UI and excellent use of machine learning. The SHAP explanation is impressive." – Final year IT student</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dataset" data-aos="fade-up">
+    <h2>📊 Dataset Info</h2>
+    <p>We used a 50k entry lung cancer dataset with features like age, genetics, environment, and symptoms to train a deep learning model using TensorFlow.</p>
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <h2>📬 Contact</h2>
+    <form action="https://formsubmit.co/el/rupizu" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_captcha" value="false">
+      <button class="btn" type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <div class="footer">© 2025 | Developed by Marpini Himabindu</div>
+  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60 },
+        size: { value: 2 },
+        color: { value: "#ffffff" },
+        line_linked: { enable: true, color: "#ffffff", opacity: 0.1 },
+        move: { enable: true, speed: 1 }
+      }
+    });
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
+    }
+
+    window.onscroll = function() {
+      const btn = document.getElementById("scrollTopBtn");
+      btn.style.display = document.documentElement.scrollTop > 100 ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.onload = function() {
+      setTimeout(() => document.getElementById("loader").classList.add("hidden"), 1000);
+      new Swiper(".mySwiper", {
+        loop: true,
+        autoplay: { delay: 3000 },
+        spaceBetween: 30,
+        slidesPerView: 1,
+        breakpoints: { 768: { slidesPerView: 2 } },
+      });
+    };
+  </script>
+</body>
+</html>

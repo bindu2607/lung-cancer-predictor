@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Assessment Form</title>
+  <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color-glass/48/lungs.png">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #333;
+      overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
+    }
+    body.dark {
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #eee;
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .dark-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .dark-toggle button {
+      background: #ffffff44;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #fff;
+      backdrop-filter: blur(5px);
+    }
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .form-card {
+      width: 95%;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      transition: background 0.5s;
+    }
+    body.dark .form-card {
+      background: rgba(30, 30, 30, 0.85);
+      color: #f2f2f2;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #111;
+      margin-bottom: 10px;
+    }
+    body.dark h1 {
+      color: #eee;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin: 15px 0 5px;
+    }
+    body.dark label {
+      color: #ddd;
+    }
+    input[type="number"], select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark input[type="number"],
+    body.dark select {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #666;
+    }
+    input[type="submit"] {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #1db954;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #1ed760;
+    }
+    lottie-player {
+      display: block;
+      margin: 0 auto 20px;
+      width: 140px;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="dark-toggle">
+    <button onclick="document.body.classList.toggle('dark')">🌓 Toggle Theme</button>
+  </div>
+
+  <div class="form-wrapper" data-aos="fade-up">
+    <div class="form-card">
+      <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_1pxqjqps.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      <h1 data-aos="fade-down">Health Assessment Form</h1>
+      <form method="POST" action="{{ url_for('results') }}">
+        <input type="hidden" name="form_title" value="Health Assessment Form">
+
+<label for="obesity">Obesity:</label>
+<input type="number" name="obesity" id="obesity" min="1" max="9" required value="1">
+
+<label for="genetic_risk">Genetic Risk:</label>
+<input type="number" name="genetic_risk" id="genetic_risk" min="1" max="9" required value="1">
+
+<label for="chronic_lung_disease">Chronic Lung Disease:</label>
+<input type="number" name="chronic_lung_disease" id="chronic_lung_disease" min="1" max="9" required value="1">
+
+<label for="balanced_diet">Balanced Diet:</label>
+<input type="number" name="balanced_diet" id="balanced_diet" min="1" max="9" required value="1">
+
+<label for="swallowing_difficulty">Swallowing Difficulty:</label>
+<input type="number" name="swallowing_difficulty" id="swallowing_difficulty" min="1" max="9" required value="1">
+
+<label for="fatigue">Fatigue:</label>
+<input type="number" name="fatigue" id="fatigue" min="1" max="9" required value="1">
+
+<label for="wheezing">Wheezing:</label>
+<input type="number" name="wheezing" id="wheezing" min="1" max="9" required value="1">
+
+<label for="weight_loss">Weight Loss:</label>
+<input type="number" name="weight_loss" id="weight_loss" min="1" max="9" required value="1">
+
+<label for="dust_allergy">Dust Allergy:</label>
+<input type="number" name="dust_allergy" id="dust_allergy" min="1" max="9" required value="1">
+
+<label for="coughing_blood">Coughing Blood:</label>
+<input type="number" name="coughing_blood" id="coughing_blood" min="1" max="9" required value="1">
+
+<label for="gender">Gender:</label>
+<select name="gender" id="gender" required>
+  <option value="" disabled>Select gender</option>
+  <option value="male" selected>Male</option>
+  <option value="female">Female</option>
+</select>
+
+<label for="air_pollution">Air Pollution:</label>
+<input type="number" name="air_pollution" id="air_pollution" min="1" max="9" required value="1">
+
+<label for="chest_pain">Chest Pain:</label>
+<input type="number" name="chest_pain" id="chest_pain" min="1" max="9" required value="1">
+
+<label for="smoking">Smoking:</label>
+<input type="number" name="smoking" id="smoking" min="1" max="9" required value="1">
+
+<label for="dry_cough">Dry Cough:</label>
+<input type="number" name="dry_cough" id="dry_cough" min="1" max="9" required value="1">
+
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    AOS.init();
+    particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
+  </script>
+</body>
+</html>
