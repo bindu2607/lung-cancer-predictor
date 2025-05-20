@@ -23,7 +23,7 @@ This end‑to‑end system enables:
 5. **Deployment**  
    Flask backend serves the model, HTML/CSS/JS front‑end with Lottie animations, Swiper.js testimonials, and dark/light theme.
 
-<img src="screenshots/result_preview.png" alt="Result Page Preview" width="600"/>
+
 
 ---
 
@@ -85,7 +85,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 **Marpini Himabindu**  
 B.Tech in Information Technology (2022–2026)  
-[GitHub](https://github.com/bindu2607) | [LinkedIn](https://www.linkedin.com/in/your-linkedin/)
+[GitHub](https://github.com/bindu2607) | [https://www.linkedin.com/in/marpini-hima-bindu/]
 
 ---
 
