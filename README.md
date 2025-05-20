@@ -2,6 +2,13 @@
 
 A Flask‑powered web application that uses a TensorFlow/Keras deep‑learning model to predict lung cancer risk levels (**Low**, **Medium**, **High**) based on the **top 15** clinical, lifestyle, and environmental factors. Trained and tested on **50,000**‑sample datasets for robust, real‑world performance.
 
+
+## 🚀 Live Demo
+
+👉 [View Deployed App](#)  
+
+https://lung-cancer-prediction-using-deep-wcfa.onrender.com/
+
 ---
 
 ## 🔍 Overview
