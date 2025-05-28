@@ -62,11 +62,11 @@ This end‑to‑end system enables:
  ```bash
    python -m venv venv
    ```
-   # macOS/Linux:
+ macOS/Linux:
  ```bash
    source venv/bin/activate
    ```
-# Windows:
+ Windows:
  ```bash
    venv\Scripts\activate
    ```
@@ -74,22 +74,22 @@ This end‑to‑end system enables:
    ```bash
    pip install -r requirements.txt
    ```
-# 4. Start the Flask app
+ 4. Start the Flask app
  ```bash
   python app.py
    ```
  ➜ Open http://127.0.0.1:5000 in your browser
-# 5. (Optional) Re‑train the model
+ 5. (Optional) Re‑train the model
  ```bash
    python train.py
    ```
-# 6. (Optional) Run batch predictions/test
+ 6. (Optional) Run batch predictions/test
  ```bash
    python test.py
    ```
 python test.py
 
-# 7. (Optional) Generate SHAP report
+7. (Optional) Generate SHAP report
  ```bash
       python shap_explain.py
    ```
