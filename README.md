@@ -48,38 +48,51 @@ This end‑to‑end system enables:
 - 🐳 Docker support (optional)
 
 ---
-
 ## ⚙️ Installation & Running Locally
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/bindu2607/lung-cancer-predictor.git
-cd lung-cancer-predictor
-
-# 2. (Optional) Create a virtual environment
-python -m venv venv
-# macOS/Linux:
-source venv/bin/activate
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/bindu2607/lung-cancer-predictor.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd lung-cancer-predictor
+   ```
+3.(Optional) Create a virtual environment
+ ```bash
+   python -m venv venv
+   ```
+   # macOS/Linux:
+ ```bash
+   source venv/bin/activate
+   ```
 # Windows:
-venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
+ ```bash
+   venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 # 4. Start the Flask app
-python app.py
-# ➜ Open http://127.0.0.1:5000 in your browser
-
+ ```bash
+  python app.py
+   ```
+ ➜ Open http://127.0.0.1:5000 in your browser
 # 5. (Optional) Re‑train the model
-python train.py
-
+ ```bash
+   python train.py
+   ```
 # 6. (Optional) Run batch predictions/test
+ ```bash
+   python test.py
+   ```
 python test.py
 
 # 7. (Optional) Generate SHAP report
-python shap_explain.py
-
-
+ ```bash
+      python shap_explain.py
+   ```
 ---
 
 ## 📄 License
